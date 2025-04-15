@@ -10,15 +10,27 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-// Necessary for Next auth
+// ========== Enums ==========
+enum ChallengeType {
+    SELECT
+    ASSIST
+}
+
+// ========== User (NextAuth compatible) ==========
 model User {
     id            String    @id @default(cuid())
     name          String?
     email         String    @unique
     emailVerified DateTime?
     image         String?
-    accounts      Account[]
-    sessions      Session[]
+
+    accounts Account[]
+    sessions Session[]
+
+    // Relations
+    challengeProgress ChallengeProgress[]
+    userProgress      UserProgress?
+    userSubscription  UserSubscription?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -49,10 +61,11 @@ model Session {
     sessionToken String   @unique
     userId       String
     expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -61,4 +74,116 @@ model VerificationToken {
     expires    DateTime
 
     @@id([identifier, token])
+}
+
+// ========== Custom App Models ==========
+
+// Language courses: Japanese, Spanish etc.
+model Course {
+    id       Int    @id @default(autoincrement())
+    title    String
+    imageSrc String @map("image_src")
+
+    units        Unit[]
+    userProgress UserProgress[]
+
+    @@map("courses")
+}
+
+// Unit 1: Learn the Basics, etc. (The grey section dividing the circles).
+model Unit {
+    id          Int    @id @default(autoincrement())
+    title       String
+    description String
+    courseId    Int
+    order       Int
+
+    course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    lessons Lesson[]
+
+    @@map("units")
+}
+
+// Nouns, Verbs, Adjectives, etc. (Those green circles)
+model Lesson {
+    id     Int    @id @default(autoincrement())
+    title  String
+    unitId Int
+    order  Int
+
+    unit       Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
+    challenges Challenge[]
+
+    @@map("lessons")
+}
+
+// Questions like What is 'El Hombre' ? 
+model Challenge {
+    id       Int           @id @default(autoincrement())
+    lessonId Int
+    type     ChallengeType
+    question String
+    order    Int
+
+    lesson            Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+    options           ChallengeOption[]
+    challengeProgress ChallengeProgress[]
+
+    @@map("challenges")
+}
+
+// Options for the questions like 'El Hombre', 'La Mujer', etc.  
+model ChallengeOption {
+    id          Int     @id @default(autoincrement())
+    challengeId Int
+    text        String
+    correct     Boolean
+    imageSrc    String? @map("image_src")
+    audioSrc    String? @map("audio_src")
+
+    challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+    @@map("challenge_options")
+}
+
+// Progress of the user in a challenge, the green line..?
+model ChallengeProgress {
+    id          Int     @id @default(autoincrement())
+    userId      String
+    challengeId Int
+    completed   Boolean @default(false)
+
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+    @@map("challenge_progress")
+}
+
+// App specific user progress.
+model UserProgress {
+    userId         String @id
+    userName       String @default("Anon") @map("user_name")
+    userImageSrc   String @default("/mascot.svg") @map("user_image_src")
+    activeCourseId Int?   @map("active_course_id")
+    hearts         Int    @default(5)
+    points         Int    @default(0)
+
+    user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    activeCourse Course? @relation(fields: [activeCourseId], references: [id], onDelete: Cascade)
+
+    @@map("user_progress")
+}
+
+// Stripe subscription model
+model UserSubscription {
+    id                     Int      @id @default(autoincrement())
+    userId                 String   @unique
+    stripeSubscriptionId   String   @unique @map("stripe_subscription_id")
+    stripeCustomerId       String   @unique @map("stripe_customer_id")
+    stripePriceId          String   @map("stripe_price_id")
+    stripeCurrentPeriodEnd DateTime @map("stripe_current_period_end")
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("user_subscription")
 }
