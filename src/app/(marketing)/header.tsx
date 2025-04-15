@@ -1,10 +1,7 @@
+import { auth, signIn } from "@/server/auth";
+import { Button } from "@/components/ui/button";
+import UserButton from "@/components/user-button";
 import Image from "next/image";
-
-import { Loader2 } from "lucide-react";
-
-import { auth } from "@/server/auth";
-import SignIn from "@/components/sign-in";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = async () => {
   const session = await auth();
@@ -25,22 +22,21 @@ const Header = async () => {
 
         {/* After Loaded, show User button*/}
         <div className="flex items-center gap-2">
-          {session && (
-            <Avatar>
-              <AvatarImage src={session.user.image ?? undefined} />
-              <AvatarFallback>
-                <Image
-                  src="/mascot.svg"
-                  height={10}
-                  width={10}
-                  alt="user-img"
-                />
-              </AvatarFallback>
-            </Avatar>
-          )}
+          {session && <UserButton session={session} />}
 
           {/* On Signout, show sign-in button */}
-          {!session && <SignIn mode="SIGNIN" />}
+          {!session && (
+            <form
+              action={async () => {
+                "use server";
+                await signIn();
+              }}
+            >
+              <Button type="submit" variant="primary">
+                Sign In
+              </Button>
+            </form>
+          )}
         </div>
       </div>
     </header>

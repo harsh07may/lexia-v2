@@ -25,6 +25,10 @@ declare module "next-auth" {
 
 export const authConfig = {
   trustHost: true,
+  theme: {
+    logo: "/mascot.svg",
+    colorScheme: "light",
+  },
   providers: [GithubProvider],
   adapter: PrismaAdapter(db),
   callbacks: {

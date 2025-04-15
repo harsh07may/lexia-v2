@@ -1,4 +1,3 @@
-import SignIn from "@/components/sign-in";
 import { Button } from "@/components/ui/button";
 import { auth, signIn } from "@/server/auth";
 import Image from "next/image";
@@ -33,26 +32,18 @@ const HomePage = async () => {
         </h1>
 
         <div className="flex w-full max-w-[330px] flex-col items-center gap-y-3">
-          {/* <ClerkLoading>
-            <SignedOut>
-              <div className="flex flex-col gap-y-3">
-                <div className="ring-border h-[48px] w-[330px] animate-pulse rounded-xl bg-gray-200 ring" />
-
-                <div className="ring-border flex h-[48px] w-[330px] items-center justify-center rounded-xl ring">
-                  <div className="h-5 w-56 animate-pulse rounded-xl bg-gray-200" />
-                </div>
-              </div>
-            </SignedOut>
-
-            <SignedIn>
-              <div className="ring-border h-[48px] w-[330px] animate-pulse rounded-xl bg-gray-200 ring" />
-            </SignedIn>
-          </ClerkLoading> */}
-
           {!session && (
             <>
-              <SignIn mode="SIGNIN" />
-              <SignIn mode="SIGNUP" />
+              <form
+                action={async () => {
+                  "use server";
+                  await signIn();
+                }}
+              >
+                <Button size="lg" type="submit" variant="secondary">
+                  Get Started
+                </Button>
+              </form>
             </>
           )}
 

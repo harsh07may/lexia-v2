@@ -8,6 +8,9 @@
 # - Podman Desktop - https://podman.io/getting-started/installation
 # 3. Open WSL - `wsl`
 # 4. Run this script - `./start-database.sh`
+# Note:If you get the error message below, 
+# /usr/bin/env: ‘bash\r’: No such file or directory
+# Run the following command to fix it: dos2unix start-database.sh  
 
 # On Linux and macOS you can run this script directly - `./start-database.sh`
 
