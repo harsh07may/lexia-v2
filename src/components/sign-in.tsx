@@ -1,4 +1,5 @@
 import { signIn } from "@/server/auth";
+import { Button } from "./ui/button";
 
 export default function SignIn() {
   return (
@@ -8,9 +9,9 @@ export default function SignIn() {
         await signIn();
       }}
     >
-      <button className="cursor-pointer" type="submit">
+      <Button className="cursor-pointer" type="button" variant="danger">
         Signin with GitHub
-      </button>
+      </Button>
     </form>
   );
 }
