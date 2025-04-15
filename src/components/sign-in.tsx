@@ -1,7 +1,7 @@
 import { signIn } from "@/server/auth";
 import { Button } from "./ui/button";
 
-export default function SignIn() {
+export default function SignIn({ mode }: { mode: "SIGNIN" | "SIGNUP" }) {
   return (
     <form
       action={async () => {
@@ -9,8 +9,12 @@ export default function SignIn() {
         await signIn();
       }}
     >
-      <Button className="cursor-pointer" type="button" variant="danger">
-        Signin with GitHub
+      <Button
+        size="lg"
+        type="button"
+        variant={mode == "SIGNIN" ? "secondary" : "primaryOutline"}
+      >
+        {mode == "SIGNIN" ? "Get Started" : "I already have an account"}
       </Button>
     </form>
   );
