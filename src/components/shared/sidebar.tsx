@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import UserButton from "./user-button";
 import SidebarItem from "./sidebar-item";
+import { sidebarItems } from "@/constants";
 
 type SidebarProps = {
   className?: string;
@@ -33,21 +34,15 @@ const Sidebar = async ({ className }: SidebarProps) => {
       </Link>
 
       <div className="flex flex-1 flex-col gap-y-2">
-        <SidebarItem label="learn" href="/learn" iconSrc="/icons/learn.svg" />
-
-        <SidebarItem
-          href="/leaderboard"
-          label="leaderboard"
-          iconSrc="/icons/leaderboard.svg"
-        />
-
-        <SidebarItem
-          href="/quests"
-          label="quests"
-          iconSrc="/icons/quests.svg"
-        />
-        <SidebarItem href="/shop" label="shop" iconSrc="/icons/shop.svg" />
-        <SidebarItem href="/lab" label="Ai Lab" iconSrc="/icons/lab.svg" />
+        {sidebarItems.map((item) => (
+          <>
+            <SidebarItem
+              label={item.label}
+              href={item.href}
+              iconSrc={item.iconSrc}
+            />
+          </>
+        ))}
       </div>
 
       <Separator className="h-1" />
