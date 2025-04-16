@@ -1,10 +1,11 @@
-import Sidebar from "@/components/shared/sidebar";
+// import Sidebar from "@/components/shared/sidbar";
 import type { PropsWithChildren } from "react";
-// import { MobileHeader, Sidebar } from "@/components";
+import MobileHeader from "@/components/shared/mobile-header";
+import Sidebar from "@/components/shared/sidebar";
 
 const MainLayout = ({ children }: PropsWithChildren) => (
   <>
-    {/* <MobileHeader /> */}
+    <MobileHeader />
     <Sidebar className="hidden md:flex" />
 
     <main className="h-full pt-[60px] md:pt-0 md:pl-[225px] lg:pl-[256px]">

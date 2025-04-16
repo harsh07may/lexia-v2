@@ -27,7 +27,7 @@ const Sidebar = async ({ className }: SidebarProps) => {
           <Image src="/mascot.svg" height={40} width={40} alt="Mascot" />
 
           <h1 className="text-3xl font-extrabold tracking-wide text-green-600">
-            Lingo
+            Lexia
           </h1>
         </div>
       </Link>
@@ -47,6 +47,7 @@ const Sidebar = async ({ className }: SidebarProps) => {
           iconSrc="/icons/quests.svg"
         />
         <SidebarItem href="/shop" label="shop" iconSrc="/icons/shop.svg" />
+        <SidebarItem href="/lab" label="Ai Lab" iconSrc="/icons/lab.svg" />
       </div>
 
       <Separator className="h-1" />
