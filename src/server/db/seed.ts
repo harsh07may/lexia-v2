@@ -1,4 +1,4 @@
-import { PrismaClient, type Challenge } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient();
 const main = async () => {

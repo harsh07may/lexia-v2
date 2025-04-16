@@ -16,7 +16,7 @@ function UserButton({ session }: { session: Session }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="h-9 w-9">
           <AvatarImage src={session.user.image ?? undefined} />
           <AvatarFallback>?</AvatarFallback>
         </Avatar>

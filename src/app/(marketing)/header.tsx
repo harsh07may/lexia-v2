@@ -1,6 +1,6 @@
 import { auth, signIn } from "@/server/auth";
 import { Button } from "@/components/ui/button";
-import UserButton from "@/components/user-button";
+import UserButton from "@/components/shared/user-button";
 import Image from "next/image";
 
 const Header = async () => {
