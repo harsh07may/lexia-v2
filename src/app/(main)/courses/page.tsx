@@ -2,6 +2,10 @@ import { getCourses, getUserProgress } from "@/server/db/queries";
 import React from "react";
 import List from "./list";
 
+/**
+ *
+ * @link https://www.figma.com/design/o7kLTNBD54bhmvPScLiDAL/Lexia-%7C-Language-Learning?node-id=1-3433&m=dev
+ */
 async function CoursesPage() {
   const coursesData = getCourses();
   const userProgressData = getUserProgress();

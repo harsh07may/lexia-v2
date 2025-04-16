@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Card } from "./card";
 import type { Course, UserProgress } from "@prisma/client";
 import { upsertUserProgress } from "@/server/actions/user-progress";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 type ListProps = {
   courses: Course[];
@@ -25,9 +26,13 @@ function List({ courses, activeCourseId }: ListProps) {
     }
 
     startTransition(() => {
-      upsertUserProgress(id).catch(() =>
-        toast.error("Something went wrong. Try a different course"),
-      );
+      upsertUserProgress(id).catch((err) => {
+        if (isRedirectError(err)) {
+          toast.success("Course activated 🚀");
+          return;
+        }
+        toast.error("Oops! That course tripped on a verb. Try another one!");
+      });
     });
   };
 
