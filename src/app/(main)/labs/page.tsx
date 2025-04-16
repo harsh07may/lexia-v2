@@ -12,6 +12,7 @@ import FeedWrapper from "@/components/shared/feed-wrapper";
 import Promo from "@/components/shared/promo";
 import StickyWrapper from "@/components/shared/sticky-wrapper";
 import UserProgress from "@/components/shared/user-progress";
+import { Separator } from "@/components/ui/separator";
 
 async function LabsPage() {
   const userProgressData = getUserProgress();
@@ -50,7 +51,8 @@ async function LabsPage() {
           <p className="text-muted-foreground mb-6 text-center text-lg text-balance">
             Step into the Lab - where language meets AI magic✨.
           </p>
-          <div className="mb-8 grid gap-4 lg:grid-cols-2">
+          <Separator />
+          <div className="mb-8 grid gap-4 py-10 lg:grid-cols-2">
             <div className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                 <BookOpenIcon className="h-6 w-6 text-green-500" />
