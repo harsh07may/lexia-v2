@@ -16,11 +16,12 @@ import {
 import { Menu } from "lucide-react";
 // import { Promo } from "@/components";
 import { sidebarItems } from "@/constants";
+import Promo from "./promo";
 
 const MobileSidebar = async () => {
-  // const userSubscriptionData = getUserSubscription();
-  // const [userSubscription] = await Promise.all([userSubscriptionData]);
-  // const isPro = !!userSubscription?.isActive;
+  const userSubscriptionData = getUserSubscription();
+  const [userSubscription] = await Promise.all([userSubscriptionData]);
+  const isPro = !!userSubscription?.isActive;
 
   return (
     <Sheet>
@@ -70,12 +71,12 @@ const MobileSidebar = async () => {
           ))}
         </div>
 
-        {/* <Promo
+        <Promo
           isMobile
           className={cn("mb-4", {
             hidden: isPro,
           })}
-        /> */}
+        />
       </SheetContent>
     </Sheet>
   );

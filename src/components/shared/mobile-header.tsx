@@ -9,6 +9,8 @@ async function MobileHeader() {
       <MobileSidebar />
 
       <div className="flex gap-4">
+        
+        {/* TODO */}
         {/* <ClerkLoading>
           <SignedIn>
             <Button
