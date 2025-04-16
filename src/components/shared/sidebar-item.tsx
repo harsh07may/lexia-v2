@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 
 type SidebarItemProps = {
+  key?: string;
   href: string;
   label: string;
   iconSrc: string;

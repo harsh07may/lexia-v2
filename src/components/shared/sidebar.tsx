@@ -35,13 +35,12 @@ const Sidebar = async ({ className }: SidebarProps) => {
 
       <div className="flex flex-1 flex-col gap-y-2">
         {sidebarItems.map((item) => (
-          <>
-            <SidebarItem
-              label={item.label}
-              href={item.href}
-              iconSrc={item.iconSrc}
-            />
-          </>
+          <SidebarItem
+            key={item.label}
+            label={item.label}
+            href={item.href}
+            iconSrc={item.iconSrc}
+          />
         ))}
       </div>
 
