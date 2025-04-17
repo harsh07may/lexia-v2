@@ -1,39 +1,67 @@
 // /app/api/writing-feedback/route.ts
+import type { TFeedback, WritingRequest } from "@/app/(main)/labs/writing/page";
 import { type NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
-interface WritingRequest {
-  text: string;
-  language: string;
-}
-
-const openai = new OpenAI();
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(req: NextRequest) {
+  //Validate the request first.
   const { text, language } = (await req.json()) as WritingRequest;
 
   const prompt = `
-You are a helpful writing tutor. Analyze the following ${language} writing and provide:
-1. A corrected version.
-2. A fluency score out of 100.
-3. 3 constructive suggestions.
+    You are a helpful writing tutor. Analyze the following ${language} writing and provide in JSON:
+    1. correctedText: A corrected version.
+    2. fluencyScore: A fluency score out of 100.
+    3. suggestions: 3 constructive suggestions in english
 
-User writing:
-${text}
-`;
+    User writing:
+    ${text}
+    `;
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
     temperature: 0.7,
+    max_tokens: 100,
   });
 
-  const content = completion.choices[0]?.message?.content ?? "";
-  // You can use structured output from GPT or parse the text here.
-  return NextResponse.json({
-    correctedText: text, // You can update this with GPT response parsing
-    fluencyScore: Math.floor(Math.random() * 30) + 70,
-    highlights: [],
-    suggestions: content.split("\n").slice(0, 3), // dummy split
-  });
+  const response = completion.choices[0]?.message.content ?? "";
+
+  if (response) {
+    const content = JSON.parse(response) as TFeedback;
+    return NextResponse.json({
+      correctedText: content.correctedText,
+      fluencyScore: content.fluencyScore,
+      suggestions: content.suggestions,
+    });
+    return;
+  } else {
+    throw Error("Error: Response error");
+  }
+
+  // EXAMPLE RESPONSE
+  // {
+  //   "id": "chatcmpl-abc123",
+  //   "object": "chat.completion",
+  //   "created": 1713360000,
+  //   "model": "gpt-4-0613",
+  //   "choices": [
+  //     {
+  //       "index": 0,
+  //       "message": {
+  //         "role": "assistant",
+  //         "content": "{\n  \"correctedText\": \"¡Hola! Veo a un hombre. Él tiene sobrepeso.\",\n  \"fluencyScore\": 75,\n  \"suggestions\": [\n    \"Try to use more respectful or sensitive language instead of 'gordo'.\",\n    \"Add more context to make your writing more engaging and informative.\",\n    \"Combine short sentences for better flow and cohesion.\"\n  ]\n}"
+  //       },
+  //       "finish_reason": "stop"
+  //     }
+  //   ],
+  //   "usage": {
+  //     "prompt_tokens": 85,
+  //     "completion_tokens": 70,
+  //     "total_tokens": 155
+  //   }
+  // }
 }

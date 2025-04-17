@@ -23,6 +23,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { GRAMMAR_TIPS, LANGUAGES, WRITING_PROMPTS } from "@/constants";
+import { toast } from "sonner";
 
 // type TFeedback = {
 //   correctedText: string;
@@ -35,7 +36,38 @@ import { GRAMMAR_TIPS, LANGUAGES, WRITING_PROMPTS } from "@/constants";
 //   fluencyScore: number;
 //   suggestions: string[];
 // };
-type TFeedback = {
+
+// Mock feedback response
+// const mockFeedback = {
+//   correctedText: text,
+//   highlights: [
+//     {
+//       type: "grammar",
+//       start: Math.floor(Math.random() * Math.max(text.length - 10, 0)),
+//       end: Math.floor(Math.random() * Math.max(text.length - 5, 5)) + 5,
+//       suggestion: "Consider using the correct tense here",
+//     },
+//     {
+//       type: "vocabulary",
+//       start: Math.floor(Math.random() * Math.max(text.length - 15, 0)),
+//       end: Math.floor(Math.random() * Math.max(text.length - 3, 3)) + 3,
+//       suggestion: "A more natural word choice would be...",
+//     },
+//   ],
+//   fluencyScore: Math.floor(Math.random() * 30) + 70, // Random score between 70-100
+//   suggestions: [
+//     "Try using more connecting words to improve flow.",
+//     "Your sentence structure is good, but vary it more for natural speech.",
+//     "Consider using more idiomatic expressions.",
+//   ],
+// };
+
+export type WritingRequest = {
+  text: string;
+  language: string;
+};
+
+export type TFeedback = {
   correctedText: string;
   fluencyScore: number;
   suggestions: string[];
@@ -49,31 +81,6 @@ function WritingLabPage() {
   const [currentTipIndex, setCurrentTipIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // Mock feedback response
-  const mockFeedback = {
-    correctedText: text,
-    highlights: [
-      {
-        type: "grammar",
-        start: Math.floor(Math.random() * Math.max(text.length - 10, 0)),
-        end: Math.floor(Math.random() * Math.max(text.length - 5, 5)) + 5,
-        suggestion: "Consider using the correct tense here",
-      },
-      {
-        type: "vocabulary",
-        start: Math.floor(Math.random() * Math.max(text.length - 15, 0)),
-        end: Math.floor(Math.random() * Math.max(text.length - 3, 3)) + 3,
-        suggestion: "A more natural word choice would be...",
-      },
-    ],
-    fluencyScore: Math.floor(Math.random() * 30) + 70, // Random score between 70-100
-    suggestions: [
-      "Try using more connecting words to improve flow.",
-      "Your sentence structure is good, but vary it more for natural speech.",
-      "Consider using more idiomatic expressions.",
-    ],
-  };
 
   // const handleSubmit = async () => {
   //   if (!text.trim()) return;
@@ -89,18 +96,26 @@ function WritingLabPage() {
   const handleSubmit = async () => {
     if (!text.trim()) return;
 
+    const body: WritingRequest = {
+      text: text,
+      language: language,
+    } satisfies WritingRequest;
+
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("/api/labs/writing", {
+      const response = await fetch("/api/labs/writing", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, language }),
+        body: JSON.stringify(body),
       });
-
-      const data = (await res.json()) as TFeedback;
-      if (!data) setFeedback(data);
+      const data = (await response.json()) as TFeedback;
+      console.log(data);
+      if (data) {
+        setFeedback(data);
+      }
     } catch (err) {
+      toast.error("Oops! Error fetching feedback.");
       console.error("Error fetching feedback:", err);
     }
 
