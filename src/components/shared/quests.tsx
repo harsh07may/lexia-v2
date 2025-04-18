@@ -33,7 +33,12 @@ const Quests = ({ points }: QuestsProps) => (
               hidden: i > 2,
             })}
           >
-            <Image src="/points.svg" alt="Points" width={40} height={40} />
+            <Image
+              src="/icons/points.svg"
+              alt="Points"
+              width={40}
+              height={40}
+            />
 
             <div className="flex w-full flex-col gap-y-2">
               <p className="text-sm font-bold text-neutral-700">

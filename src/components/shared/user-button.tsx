@@ -11,6 +11,7 @@ import type { Session } from "next-auth";
 import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { signOut } from "@/server/auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 function UserButton({ session }: { session: Session }) {
   return (
@@ -36,6 +37,7 @@ function UserButton({ session }: { session: Session }) {
             action={async () => {
               "use server";
               await signOut();
+              redirect("/");
             }}
           >
             <button type="submit">Sign Out</button>

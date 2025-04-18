@@ -1,14 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
 
-import {
-  Check,
-  Send,
-  RefreshCw,
-  Lightbulb,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Check, Send, RefreshCw, Lightbulb } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { Card } from "@/components/ui/card";
