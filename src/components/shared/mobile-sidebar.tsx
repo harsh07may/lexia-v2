@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { getUserSubscription } from "@/server/db/queries";

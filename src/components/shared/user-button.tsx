@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -7,9 +5,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Session } from "next-auth";
-import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { signOut } from "@/server/auth";
+import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
+import type { Session } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 

@@ -1,8 +1,8 @@
 // /app/api/writing-feedback/route.ts
-import { type NextRequest, NextResponse } from "next/server";
 import type { TFeedback, WritingRequest } from "@/app/(main)/labs/writing/page";
 import { env } from "@/env";
 import { GoogleGenAI } from "@google/genai";
+import { type NextRequest, NextResponse } from "next/server";
 // import OpenAI from "openai";
 
 const gemini = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });

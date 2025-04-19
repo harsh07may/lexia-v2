@@ -1,11 +1,12 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
 
-import { Check, Send, RefreshCw, Lightbulb } from "lucide-react";
+import { Check, Lightbulb, RefreshCw, Send } from "lucide-react";
 import { useRef, useState } from "react";
 
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import {
   Select,
   SelectContent,
@@ -14,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Progress } from "@/components/ui/progress";
 import { LANGUAGES } from "@/constants";
 import { toast } from "sonner";
 import Tips from "./tips";

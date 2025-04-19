@@ -1,5 +1,4 @@
 import { getCourses, getUserProgress } from "@/server/db/queries";
-import React from "react";
 import List from "./list";
 
 /**

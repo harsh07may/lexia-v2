@@ -1,12 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
-import { auth } from "@/server/auth";
 import { cn } from "@/lib/utils";
+import { auth } from "@/server/auth";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
-import UserButton from "./user-button";
-import SidebarItem from "./sidebar-item";
 import { sidebarItems } from "@/constants";
+import SidebarItem from "./sidebar-item";
+import UserButton from "./user-button";
 
 type SidebarProps = {
   className?: string;

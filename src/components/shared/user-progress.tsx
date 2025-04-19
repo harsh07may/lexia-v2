@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { InfinityIcon } from "lucide-react";
 import type { Course } from "@prisma/client";
+import { InfinityIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface UserProgressProps {
   activeCourse: Course;

@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
-import { quests } from "@/constants";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { quests } from "@/constants";
 
 type QuestsProps = {
   points: number;

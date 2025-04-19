@@ -1,14 +1,14 @@
 "use server";
+import { DEFAULT_HEARTS_MAX, POINTS_TO_REFILL } from "@/constants";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   getCourseById,
   getUserProgress,
   getUserSubscription,
 } from "../db/queries";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import { DEFAULT_HEARTS_MAX, POINTS_TO_REFILL } from "@/constants";
 
 export async function getUserId() {
   const session = await auth();

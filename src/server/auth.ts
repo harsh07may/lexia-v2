@@ -1,7 +1,6 @@
 import { cache } from "react";
 
-import NextAuth from "next-auth";
-import { type DefaultSession, type NextAuthConfig } from "next-auth";
+import NextAuth, { type DefaultSession, type NextAuthConfig } from "next-auth";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import GithubProvider from "next-auth/providers/github";

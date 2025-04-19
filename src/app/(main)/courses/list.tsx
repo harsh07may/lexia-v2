@@ -1,13 +1,13 @@
 "use client";
 
-import { toast } from "sonner";
-import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { toast } from "sonner";
 
-import { Card } from "./card";
-import type { Course, UserProgress } from "@prisma/client";
 import { upsertUserProgress } from "@/server/actions/user-progress";
+import type { Course, UserProgress } from "@prisma/client";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { Card } from "./card";
 
 type ListProps = {
   courses: Course[];

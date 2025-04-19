@@ -1,9 +1,8 @@
+import { BookOpenIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BookOpenIcon } from "lucide-react";
 
-import { getUserProgress, getUserSubscription } from "@/server/db/queries";
 import {
   FeedWrapper,
   Promo,
@@ -13,6 +12,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { getUserProgress, getUserSubscription } from "@/server/db/queries";
 
 async function LabsPage() {
   const userProgressData = getUserProgress();

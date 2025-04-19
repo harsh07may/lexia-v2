@@ -7,15 +7,15 @@ import {
   getUserSubscription,
 } from "@/server/db/queries";
 
-import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 import {
   FeedWrapper,
-  UserProgress,
-  StickyWrapper,
   Promo,
   Quests,
+  StickyWrapper,
+  UserProgress,
 } from "@/components/shared";
 
 import { auth } from "@/server/auth";

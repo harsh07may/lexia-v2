@@ -1,11 +1,11 @@
-export { default as Promo } from "./promo";
-export { default as Sidebar } from "./sidebar";
-export { default as Quests } from "./quests";
+export { default as FeedWrapper } from "./feed-wrapper";
 export { default as MobileHeader } from "./mobile-header";
 export { default as MobileSidebar } from "./mobile-sidebar";
+export { default as Promo } from "./promo";
+export { default as Quests } from "./quests";
+export { default as Sidebar } from "./sidebar";
 export { default as SidebarItem } from "./sidebar-item";
-export { default as FeedWrapper } from "./feed-wrapper";
 export { default as StickyWrapper } from "./sticky-wrapper";
-export { default as UserProgress } from "./user-progress";
 export { default as UpgradeButton } from "./upgrade-plan";
 export { default as UserButton } from "./user-button";
+export { default as UserProgress } from "./user-progress";

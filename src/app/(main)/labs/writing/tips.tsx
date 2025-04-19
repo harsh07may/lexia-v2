@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
