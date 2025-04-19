@@ -1,18 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
 import { BookOpenIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { getUserProgress, getUserSubscription } from "@/server/db/queries";
-
+import {
+  FeedWrapper,
+  Promo,
+  StickyWrapper,
+  UserProgress,
+} from "@/components/shared";
 import { buttonVariants } from "@/components/ui/button";
-import FeedWrapper from "@/components/shared/feed-wrapper";
-import Promo from "@/components/shared/promo";
-import StickyWrapper from "@/components/shared/sticky-wrapper";
-import UserProgress from "@/components/shared/user-progress";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 async function LabsPage() {
   const userProgressData = getUserProgress();

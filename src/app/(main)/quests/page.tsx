@@ -3,12 +3,14 @@ import { redirect } from "next/navigation";
 
 import { quests } from "@/constants";
 
-import { Progress } from "@/components/ui/progress";
 import { getUserProgress, getUserSubscription } from "@/server/db/queries";
-import UserProgress from "@/components/shared/user-progress";
-import FeedWrapper from "@/components/shared/feed-wrapper";
-import StickyWrapper from "@/components/shared/sticky-wrapper";
-import Promo from "@/components/shared/promo";
+import { Progress } from "@/components/ui/progress";
+import {
+  UserProgress,
+  FeedWrapper,
+  StickyWrapper,
+  Promo,
+} from "@/components/shared";
 
 const QuestsPage = async () => {
   const userProgressData = getUserProgress();

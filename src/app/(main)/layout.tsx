@@ -1,7 +1,6 @@
 // import Sidebar from "@/components/shared/sidbar";
 import type { PropsWithChildren } from "react";
-import MobileHeader from "@/components/shared/mobile-header";
-import Sidebar from "@/components/shared/sidebar";
+import { MobileHeader, Sidebar } from "@/components/shared";
 
 const MainLayout = ({ children }: PropsWithChildren) => (
   <>

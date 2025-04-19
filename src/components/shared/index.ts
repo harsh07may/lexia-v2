@@ -8,3 +8,4 @@ export { default as FeedWrapper } from "./feed-wrapper";
 export { default as StickyWrapper } from "./sticky-wrapper";
 export { default as UserProgress } from "./user-progress";
 export { default as UpgradeButton } from "./upgrade-plan";
+export { default as UserButton } from "./user-button";
