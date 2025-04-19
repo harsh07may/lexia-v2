@@ -1,3 +1,6 @@
+import ExitModal from "@/components/modals/ExitModal";
+import HeartsModal from "@/components/modals/HeartsModal";
+import PracticeModal from "@/components/modals/PractiseModal";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
@@ -27,6 +30,9 @@ export default function RootLayout({
         >
           {children}
           <Toaster richColors />
+          <ExitModal />
+          <HeartsModal />
+          <PracticeModal />
         </body>
       </SessionProvider>
     </html>

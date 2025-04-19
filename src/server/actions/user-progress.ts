@@ -10,7 +10,7 @@ import {
   getUserSubscription,
 } from "../db/queries";
 
-export async function getUserId() {
+async function getUserId() {
   const session = await auth();
   const userId = session?.user.id;
 
