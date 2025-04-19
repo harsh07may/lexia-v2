@@ -1,5 +1,5 @@
 import { getCourses, getUserProgress } from "@/server/db/queries";
-import List from "./list";
+import List from "./_components/list";
 
 /**
  *

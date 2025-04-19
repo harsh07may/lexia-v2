@@ -18,8 +18,8 @@ const UserProgress = ({
   hasActiveSubscription,
 }: UserProgressProps) => (
   <div className="flex w-full items-center justify-between md:gap-x-0.5 lg:gap-x-2">
-    <Link href="/courses">
-      <Button variant="defaultOutline">
+    <Button variant="defaultOutline" asChild>
+      <Link href="/courses">
         <Image
           alt={activeCourse.title}
           src={activeCourse.imageSrc}
@@ -27,11 +27,11 @@ const UserProgress = ({
           width={32}
           className="rounded-md border"
         />
-      </Button>
-    </Link>
+      </Link>
+    </Button>
 
-    <Link href="/shop">
-      <Button variant="defaultOutline" className="text-orange-500">
+    <Button variant="defaultOutline" className="text-orange-500" asChild>
+      <Link href="/shop">
         <Image
           alt="Points"
           src="/icons/points.svg"
@@ -40,11 +40,11 @@ const UserProgress = ({
           className="mr-2"
         />
         {points}
-      </Button>
-    </Link>
+      </Link>
+    </Button>
 
-    <Link href="/shop">
-      <Button variant="defaultOutline" className="text-rose-500">
+    <Button variant="defaultOutline" className="text-rose-500" asChild>
+      <Link href="/shop">
         <Image
           alt="Hearts"
           src="/icons/heart.svg"
@@ -58,8 +58,8 @@ const UserProgress = ({
         ) : (
           hearts
         )}
-      </Button>
-    </Link>
+      </Link>
+    </Button>
   </div>
 );
 
