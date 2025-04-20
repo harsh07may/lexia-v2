@@ -6,7 +6,7 @@ import { getUserProgress, getUserSubscription } from "@/server/db/queries";
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 
-export async function getUserId() {
+async function getUserId() {
   const session = await auth();
   const userId = session?.user.id;
 
@@ -81,7 +81,6 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 };
 
 /*************** HELPER FUNCTIONS ***************/
-
 
 const revalidateAllPaths = () => {
   revalidatePath("/learn");
