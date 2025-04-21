@@ -1,57 +1,54 @@
 "use server";
 
+import { PRICE_ID } from "@/constants";
 import { absoluteUrl } from "@/lib/utils";
 import { auth } from "@/server/auth";
 import { getUserSubscription } from "@/server/db/queries";
+import type {
+  SubscriptionCreatedEvent,
+  SubscriptionUpdatedEvent,
+} from "@paddle/paddle-node-sdk";
+import { db } from "../db";
 
 const returnUrl = absoluteUrl("/shop");
 
-// export const createStripeUrl = async () => {
-//   const userId = await getUserId();
+export const createSubscription = async (
+  eventData: SubscriptionCreatedEvent | SubscriptionUpdatedEvent,
+) => {
+  const session = await auth();
+  const user = session?.user;
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
 
-//   if (!userId) {
-//     throw new Error("Unauthorized");
-//   }
+  const userSubscription = await getUserSubscription();
+  if (userSubscription?.id) {
+    await db.userSubscription.update({
+      data: {
+        userId: user.id,
+        paddlePriceId: PRICE_ID,
+        paddleCustomerId: eventData.data.customerId,
+        paddleSubscriptionId: eventData.data.id,
+        stripeCurrentPeriodEnd:
+          eventData.data.currentBillingPeriod?.endsAt ?? Date.now().toString(),
+      },
+      where: {
+        userId: user.id,
+      },
+    });
+    return { success: true, message: "Subscription updated exists" };
+  }
 
-//   const userSubscription = await getUserSubscription();
+  await db.userSubscription.create({
+    data: {
+      userId: user.id,
+      paddlePriceId: PRICE_ID,
+      paddleCustomerId: eventData.data.customerId,
+      paddleSubscriptionId: eventData.data.id,
+      stripeCurrentPeriodEnd:
+        eventData.data.currentBillingPeriod?.endsAt ?? Date.now().toString(),
+    },
+  });
 
-// session for current subscribers
-// if (userSubscription?.stripeCustomerId) {
-//   const stripeSession = await stripe.billingPortal.sessions.create({
-//     customer: userSubscription.stripeCustomerId,
-//     return_url: returnUrl,
-//   });
-
-//   return { data: stripeSession.url };
-// }
-
-// session for new subscribers
-// const stripeSession = await stripe.checkout.sessions.create({
-//   mode: "subscription",
-//   payment_method_types: ["card"],
-//   customer_email: user.emailAddresses[0].emailAddress,
-//   line_items: [
-//     {
-//       quantity: 1,
-//       price_data: {
-//         currency: "USD",
-//         product_data: {
-//           name: "Lingo Pro",
-//           description: "Unlimited Hearts",
-//         },
-//         unit_amount: 2000, // $20.00 USD
-//         recurring: {
-//           interval: "month",
-//         },
-//       },
-//     },
-//   ],
-//   metadata: {
-//     userId,
-//   },
-//   success_url: returnUrl,
-//   cancel_url: returnUrl,
-// });
-
-//   return { data: stripeSession.url };
-// };
+  return { success: true, message: "Subscription created successfully" };
+};

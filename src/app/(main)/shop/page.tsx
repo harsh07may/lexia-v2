@@ -7,8 +7,10 @@ import {
   StickyWrapper,
   UserProgress,
 } from "@/components/shared";
+import { auth } from "@/server/auth";
 import { getUserProgress, getUserSubscription } from "@/server/db/queries";
-import Items from "./_components/items";
+import CheckoutButton from "./_components/checkout";
+import RefillButton from "./_components/items";
 
 const ShopPage = async () => {
   const userProgressData = getUserProgress();
@@ -19,6 +21,7 @@ const ShopPage = async () => {
     userSubscriptionData,
   ]);
 
+  const session = await auth();
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");
   }
@@ -38,7 +41,7 @@ const ShopPage = async () => {
 
       <FeedWrapper>
         <div className="mt-7 flex w-full flex-col items-center">
-          <Image src="/shop.svg" alt="Shop" height={90} width={90} />
+          <Image src="/icons/shop.svg" alt="Shop" height={90} width={90} />
 
           <h1 className="my-6 text-center text-2xl font-bold text-neutral-800">
             Shop
@@ -47,12 +50,31 @@ const ShopPage = async () => {
           <p className="text-muted-foreground mb-6 text-center text-lg text-balance">
             Spend your points on cool stuff.
           </p>
+          <ul className="w-full">
+            <RefillButton
+              hearts={userProgress.hearts}
+              points={userProgress.points}
+            />
+            <div className="flex w-full flex-col items-center gap-x-4 gap-y-4 border-t-2 p-4 pt-8 lg:flex-row">
+              <Image
+                src="/icons/unlimited.svg"
+                alt="Unlimited"
+                height={60}
+                width={60}
+              />
 
-          <Items
-            hearts={userProgress.hearts}
-            points={userProgress.points}
-            hasActiveSubscription={isPro}
-          />
+              <div className="flex-1">
+                <p className="text-base font-bold text-neutral-700 lg:text-xl">
+                  Unlimited hearts
+                </p>
+              </div>
+
+              <CheckoutButton
+                userEmail={session?.user.email ?? undefined}
+                hasActiveSubscription={isPro}
+              />
+            </div>
+          </ul>
         </div>
       </FeedWrapper>
 

@@ -2,6 +2,7 @@ export const POINTS_TO_REFILL = 10;
 export const DEFAULT_HEARTS_MAX = 5;
 export const DEFAULT_POINTS_START = 0;
 export const POINTS_PER_CHALLENGE = 10;
+export const PRICE_ID = "pri_01jsbzwy7bav164azmcasgx03f";
 
 // Sample prompt for labs
 export const WRITING_PROMPTS = [

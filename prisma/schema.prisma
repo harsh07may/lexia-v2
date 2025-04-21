@@ -178,9 +178,9 @@ model UserProgress {
 model UserSubscription {
     id                     Int      @id @default(autoincrement())
     userId                 String   @unique
-    stripeSubscriptionId   String   @unique @map("stripe_subscription_id")
-    stripeCustomerId       String   @unique @map("stripe_customer_id")
-    stripePriceId          String   @map("stripe_price_id")
+    paddleSubscriptionId   String   @unique @map("stripe_subscription_id")
+    paddleCustomerId       String   @unique @map("stripe_customer_id")
+    paddlePriceId          String   @map("stripe_price_id")
     stripeCurrentPeriodEnd DateTime @map("stripe_current_period_end")
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
