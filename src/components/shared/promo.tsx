@@ -8,7 +8,7 @@ type PromoProps = {
   className?: string;
 };
 
-const Promo = ({ isMobile, className }: PromoProps) => (
+const Promo = ({ className }: PromoProps) => (
   <div className={cn("space-y-4 rounded-xl border-2 p-4", className)}>
     <div className="space-y-2">
       <div className="flex items-center justify-center gap-x-2">
@@ -21,7 +21,7 @@ const Promo = ({ isMobile, className }: PromoProps) => (
       </p>
     </div>
 
-    <UpgradeButton isMobile={isMobile} />
+    <UpgradeButton />
   </div>
 );
 

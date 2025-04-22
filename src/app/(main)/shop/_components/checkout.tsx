@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { PRICE_ID } from "@/constants";
+import { env } from "@/env";
 import { initializePaddle, type Environments } from "@paddle/paddle-js";
 
 export default function CheckoutButton({
@@ -12,8 +13,8 @@ export default function CheckoutButton({
 }) {
   const openCheckout = async () => {
     await initializePaddle({
-      token: process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN!,
-      environment: process.env.NEXT_PUBLIC_PADDLE_ENV as Environments,
+      token: env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN,
+      environment: env.NEXT_PUBLIC_PADDLE_ENV as Environments,
       checkout: {
         settings: {
           variant: "one-page",
@@ -35,7 +36,7 @@ export default function CheckoutButton({
   return (
     <>
       <Button onClick={openCheckout}>
-        {hasActiveSubscription ? "settings" : "upgrade"}
+        {hasActiveSubscription ? "settings" : "Upgrade now"}
       </Button>
     </>
   );

@@ -72,13 +72,12 @@ const MobileSidebar = async () => {
         </div>
 
         <Promo
-          isMobile
           className={cn("mb-4", {
             hidden: isPro,
           })}
         />
       </SheetContent>
-    </Sheet>
+    </Sheet> 
   );
 };
 

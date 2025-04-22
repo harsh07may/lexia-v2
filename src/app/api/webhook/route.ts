@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { createSubscription } from "@/server/actions/user-subscription";
 import {
   Environment,
@@ -10,7 +11,7 @@ import type { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   const signature = request.headers.get("paddle-signature") ?? "";
   const rawRequestBody = await request.text();
-  const privateKey = process.env.PADDLE_NOTIFICATION_WEBHOOK_SECRET ?? "";
+  const privateKey = env.PADDLE_NOTIFICATION_WEBHOOK_SECRET ?? "";
 
   try {
     if (!signature || !rawRequestBody) {
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const paddle = new Paddle(process.env.PADDLE_API_KEY!, {
+    const paddle = new Paddle(env.PADDLE_API_KEY, {
       environment: Environment.sandbox,
       logLevel: LogLevel.error,
     });
@@ -39,9 +40,9 @@ export async function POST(request: NextRequest) {
           console.log(eventData);
           await createSubscription(eventData);
           break;
-        case EventName.CustomerCreated:
-        case EventName.CustomerUpdated:
-          console.log(eventData);
+        case EventName.SubscriptionCanceled:
+          console.log("Subscriptiond Canceled");
+          // TODO:
           //   await updateCustomerData(eventData);
           break;
       }

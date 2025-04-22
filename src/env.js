@@ -10,15 +10,18 @@ export const env = createEnv({
     AUTH_GITHUB_ID: z.string(),
     AUTH_GITHUB_SECRET: z.string(),
     DATABASE_URL: z.string().url(),
-    OPENAI_API_KEY: z.string(),
     GEMINI_API_KEY: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    PADDLE_API_KEY: z.string(),
+    PADDLE_NOTIFICATION_WEBHOOK_SECRET: z.string(),
   },
 
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_PADDLE_CLIENT_TOKEN: z.string(),
+    NEXT_PUBLIC_PADDLE_ENV: z.string(),
   },
 
   runtimeEnv: {
@@ -26,9 +29,14 @@ export const env = createEnv({
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_PADDLE_ENV: process.env.NEXT_PUBLIC_PADDLE_ENV,
+    NEXT_PUBLIC_PADDLE_CLIENT_TOKEN:
+      process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN,
+    PADDLE_API_KEY: process.env.PADDLE_API_KEY,
+    PADDLE_NOTIFICATION_WEBHOOK_SECRET:
+      process.env.PADDLE_NOTIFICATION_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
