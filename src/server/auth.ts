@@ -4,6 +4,7 @@ import NextAuth, { type DefaultSession, type NextAuthConfig } from "next-auth";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import GithubProvider from "next-auth/providers/github";
+import Resend from "next-auth/providers/resend";
 
 import { db } from "@/server/db";
 
@@ -27,8 +28,15 @@ export const authConfig = {
   theme: {
     logo: "/mascot.svg",
     colorScheme: "light",
+    brandColor: "#35CB6C",
   },
-  providers: [GithubProvider],
+  providers: [
+    GithubProvider,
+    Resend({
+      from: "no-reply@email.harsh07may.site",
+      name: "Email",
+    }),
+  ],
   adapter: PrismaAdapter(db),
   callbacks: {
     session: ({ session, user }) => ({
