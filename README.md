@@ -13,7 +13,6 @@ Ready to become fluent? Get started with [Lexia](http://lexia-lang.vercel.app) t
 ## Contributions Welcome!
 
 Lexia is an open-source project. If you're passionate about language learning and development, we'd love your help.
-
 First, run the development server:
 
 ```bash
@@ -23,8 +22,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-To learn more about Next.js, take a look at the following resources:
+# Tech Stack
 
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-t3-app`](https://create.t3.gg/en/introduction).
+To learn more take a look at the following resources:
+
+## Front-end
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [TailwindCSS](https://tailwindcss.com/) - A utility-first CSS framework with reusable classes.
+- [Zustand](https://zustand-demo.pmnd.rs/) - A small, fast and scalable bearbones React state-management library.
+
+## Back-end
+- [Prisma](https://create.t3.gg/en/usage/prisma) - Prisma ORM is a Node.js and TypeScript ORM with an intuitive data model, automated migrations, type-safety, and auto-completion.
+- [NextAuth](https://create.t3.gg/en/usage/next-auth) - NextAuth.js is a complete open-source authentication solution for Next.js applications.
+- [GeminiAI](https://gemini.google.com) - A set of generative AI Models API by Google. 
+- [Paddle](https://gemini.google.com) - A complete digital product sales and subscription management platform. 
+- [Vercel](https://create.t3.gg/en/deployment/vercel) - Vercel is a developer cloud to build and deploy web applications.

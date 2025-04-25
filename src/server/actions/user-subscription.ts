@@ -10,8 +10,6 @@ import type {
 } from "@paddle/paddle-node-sdk";
 import { db } from "../db";
 
-const returnUrl = absoluteUrl("/shop");
-
 export const createSubscription = async (
   eventData: SubscriptionCreatedEvent | SubscriptionUpdatedEvent,
 ) => {
