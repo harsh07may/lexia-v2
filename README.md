@@ -38,3 +38,5 @@ To learn more take a look at the following resources:
 - [GeminiAI](https://gemini.google.com) - A set of generative AI Models API by Google. 
 - [Paddle](https://gemini.google.com) - A complete digital product sales and subscription management platform. 
 - [Vercel](https://create.t3.gg/en/deployment/vercel) - Vercel is a developer cloud to build and deploy web applications.
+
+Find out more: [Lexia | Eraser.io](https://app.eraser.io/workspace/VLrevFXd2Vz3FC5w8sgS?origin=share)
